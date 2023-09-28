@@ -50,7 +50,9 @@ class BoardController: NSObject,
   // Tip: Take a look at how resetBoard is implemented above. The only difference is that you don't want to change the settings
   func resetBoardWithCurrentSettings() {
     // START YOUR CODE HERE
-    // ...
+    numTimesGuessed = 0
+    collectionView.reloadData()
+    
     // END YOUR CODE HERE
   }
   
@@ -62,7 +64,10 @@ class BoardController: NSObject,
   // Checkpoint: Correctly implementing this should allow you to change the number of letters in the goal word!
   private func applyNumLettersSettings(with settings: [String: Any]) {
     // START YOUR CODE HERE
-    // ...
+      if let numLetters = settings[kNumLettersKey] as? Int {
+        // Assign numItemsPerRow to be equal to numLetters
+          numItemsPerRow = numLetters
+      }
     // END YOUR CODE HERE
   }
   
@@ -74,7 +79,10 @@ class BoardController: NSObject,
   // Checkpoint: Correctly implementing this should allow you to change the number of rows in the board!
   private func applyNumGuessesSettings(with settings: [String: Any]) {
     // START YOUR CODE HERE
-    // ...
+      if let numGuesses = settings[kNumGuessesKey] as? Int {
+        // Assign numItemsPerRow to be equal to numLetters
+          numRows = numGuesses
+      }
     // END YOUR CODE HERE
   }
   
@@ -87,7 +95,13 @@ class BoardController: NSObject,
   // to check the before/after value of goalWord and see if it changes to the correct theme
   private func applyThemeSettings(with settings: [String: Any]) {
     // START YOUR CODE HERE
-    // ...
+      if let themeKey = settings[kWordThemeKey] as? String{
+          if let theme = WordTheme(rawValue: themeKey){
+//              print("GOOOOOAL", goalWord)
+              goalWord = WordGenerator.generateGoalWord(with: theme)
+//              print(goalWord)
+          }
+      }
     // END YOUR CODE HERE
   }
   
@@ -97,7 +111,11 @@ class BoardController: NSObject,
   // Checkpoint: Correctly implementing this function should change the goal word each time the user inputs an entire row of letters
   private func applyIsAlienWordleSettings(with settings: [String: Any]) {
     // START YOUR CODE HERE
-    // ...
+      if let isAlien = settings[kIsAlienWordleKey] as? Bool{
+//          print("before", isAlienWordle)
+          isAlienWordle = isAlien
+//          print("after", isAlienWordle)
+      }
     // START YOUR CODE HERE
   }
 }

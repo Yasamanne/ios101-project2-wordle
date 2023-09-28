@@ -36,6 +36,7 @@ class ViewController: UIViewController,
                                              style: .plain,
                                              target: self,
                                              action: #selector(didTapSettingsButton))
+    
     rightBarButtonItem.tintColor = .white
     navigationItem.rightBarButtonItem = rightBarButtonItem
     // Exercise 5 Pt. 1 (optional): Add a button on the left-hand side of the navigation bar to reset the
@@ -46,7 +47,12 @@ class ViewController: UIViewController,
     // Tip 2: You'll want to use and implement `resetBoardWithCurrentSettings` inside of BoardController.swift
     // in the function that you fire when the button is tapped
     // START YOUR CODE HERE
-    // ...
+      let leftBarButtonItem = UIBarButtonItem(title: "Reset Game",
+                                               style: .plain,
+                                               target: self,
+                                               action: #selector(didTapResetButton))
+      leftBarButtonItem.tintColor = .white
+      navigationItem.leftBarButtonItem = leftBarButtonItem
     // END YOUR CODE HERE
   }
   
@@ -62,6 +68,9 @@ class ViewController: UIViewController,
   
   func didChangeSettings(with settings: [String: Any]) {
     boardController.resetBoard(with: settings)
+  }
+  @objc private func didTapResetButton() {
+      boardController.resetBoardWithCurrentSettings()
   }
 }
 
